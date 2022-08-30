@@ -1,9 +1,11 @@
-ClickHouse C++ client
+ClickHouse C++11 client
 =====
 
-C++ client for [ClickHouse](https://clickhouse.tech/)
+C++11 client for [ClickHouse](https://clickhouse.tech/)
 
-**NOTE:** The library is no longer supported. Please use https://github.com/ClickHouse/clickhouse-cpp.
+**NOTE:**  
+The official [Clickhouse Client](https://github.com/ClickHouse/clickhouse-cpp) requires at least C++17 (or C++14 with experimental string_view).  
+Meanwhile, this client can be compiled and used at the C++11 environment.
 
 ## Supported data types
 
@@ -19,10 +21,6 @@ C++ client for [ClickHouse](https://clickhouse.tech/)
 * String
 * Tuple
 * UInt8, UInt16, UInt32, UInt64, Int8, Int16, Int32, Int64
-
-## C++ version
-
-Currently, minimal version of C++ standard is 17, for C++ 11 see [1.x release line](https://github.com/artpaul/clickhouse-cpp/releases).
 
 ## Building
 
@@ -47,6 +45,7 @@ Client client(ClientOptions().SetHost("localhost"));
 client.Execute("CREATE TABLE IF NOT EXISTS test.numbers (id UInt64, name String) ENGINE = Memory");
 
 /// Insert some values.
+/// Suggest to insert through `Block` instead of raw SQL.
 {
     Block block;
 
